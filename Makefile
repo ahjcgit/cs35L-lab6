@@ -16,12 +16,15 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
 # Optimization level.  Change this -O2 to -Og or -O0 or whatever.
-OPTIMIZE =
+OPTIMIZE = -o
 
 # The C compiler and its options.
 CC = gcc
 CFLAGS = $(OPTIMIZE) -g3 -Wall -Wextra -fanalyzer \
   -march=native -mtune=native -mrdrnd
+
+# Object files
+OBJS = randall.o options.o output.o rand64-hw.o rand64-sw.o
 
 # The archiver command, its options and filename extension.
 TAR = tar
@@ -51,3 +54,10 @@ repository-tarball:
 
 clean:
 	rm -f *.o *.$(TAREXT) randall
+
+#Check Target
+check:
+	./randall 256 > ./tmp/randall_output
+	@test $$(wc -c < ./tmp/randall_output) -eq 256 && \
+	(echo "Test passed") || \
+	(echo "Test failed"; exit 1)
