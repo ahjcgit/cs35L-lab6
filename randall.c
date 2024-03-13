@@ -54,10 +54,8 @@ int main (int argc, char **argv)
       char *endptr;
       errno = 0;
       nbytes = strtoll (argv[1], &endptr, 10);
-      if (errno)
-	perror (argv[1]);
-      else
-	valid = !*endptr && 0 <= nbytes;
+      if (errno) perror (argv[1]);
+      else valid = !*endptr && 0 <= nbytes;
     }
   if (!valid)
     {
@@ -86,8 +84,12 @@ int main (int argc, char **argv)
       rand64 = software_rand64;
       finalize = software_rand64_fini;
     }
-
-  initialize ();
+  if(initialize == software_rand64_init &&options.input_mode == "lrand48_r"){
+    initialize(options.file, 1);
+  } else {
+    initialize ();
+  }
+      
   int wordsize = sizeof rand64 ();
   int output_errno = 0;
 

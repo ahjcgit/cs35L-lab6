@@ -3,9 +3,6 @@
 #include <getopt.h>
 #include "options.h"
 
-enum Input { RDRAND, LRAND48, FILE };
-enum Output { STDIO, BYTES };
-
 ProgramOptions parse_options(int argc, char *argv[]){
     ProgramOptions options;
 
@@ -13,7 +10,7 @@ ProgramOptions parse_options(int argc, char *argv[]){
     options.input_mode = "rdrand"; //Default case
     options.output_mode = "stdio"; //Default case
     options.valid = 0;
-    options.file_dir = NULL;
+    options.file = NULL;
     options.blocksize = 0;
 
     int opt;
@@ -21,12 +18,12 @@ ProgramOptions parse_options(int argc, char *argv[]){
         switch (opt) {
         case 'i':
             if (strcmp(optarg, "rdrand") == 0){
-                options.input_mode = RDRAND;
+                options.input_mode = "rdrand";
             } else if (strcmp(optarg, "lrand48_r") == 0)
-            options.input_mode = LRAND48;
+            options.input_mode = "ldrand48_r";
             else if ('/' == optarg[0]){
-                options.input_mode = FILE;
-                options.file_dir = optarg;
+                options.input_mode = "file";
+                options.file = optarg;
             }
             else{
                 return;
@@ -36,9 +33,9 @@ ProgramOptions parse_options(int argc, char *argv[]){
         
         case 'o':
             if (strcmp(optarg, "stdio") == 0){
-                options.output_mode = STDIO;
+                options.output_mode = "stdio";
             } else {
-                options.output_mode = BYTES;
+                options.output_mode = "bytes";
                 options.blocksize = atoi(optarg);
             }
             break;
