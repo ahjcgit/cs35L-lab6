@@ -1,3 +1,8 @@
+#include "rand64-hw.h"
+#include <stdbool.h>
+
+#define bit_RDRND ( 1 << 30)
+
 /* Hardware implementation.  */
 
 /* Description of the current CPU.  */

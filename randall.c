@@ -40,12 +40,15 @@
 
 
 /* Main program, which outputs N bytes of random data.  */
-int
-main (int argc, char **argv)
+int main (int argc, char **argv)
 {
+  ProgramOptions options = parse_options(argc, argv);
+
   /* Check arguments.  */
   bool valid = false;
   long long nbytes;
+
+
   if (argc == 2)
     {
       char *endptr;
@@ -88,8 +91,7 @@ main (int argc, char **argv)
   int wordsize = sizeof rand64 ();
   int output_errno = 0;
 
-  do
-    {
+  do{
       unsigned long long x = rand64 ();
       int outbytes = nbytes < wordsize ? nbytes : wordsize;
       if (!writebytes (x, outbytes))

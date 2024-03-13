@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <getopt.h>
+#include "options.h"
+
+enum Input { RDRAND, LRAND48, FILE };
+enum Output { STDIO, BYTES };
+
+ProgramOptions parse_options(int argc, char *argv[]){
+    ProgramOptions options;
+
+    //Initializing default cases
+    options.input_mode = "rdrand"; //Default case
+    options.output_mode = "stdio"; //Default case
+    options.valid = 0;
+    options.file_dir = NULL;
+    options.blocksize = 0;
+
+    int opt;
+    while ((opt = getopt(argc, argv, "i:o:")) != -1) {
+        switch (opt) {
+        case 'i':
+            if (strcmp(optarg, "rdrand") == 0){
+                options.input_mode = RDRAND;
+            } else if (strcmp(optarg, "lrand48_r") == 0)
+            options.input_mode = LRAND48;
+            else if ('/' == optarg[0]){
+                options.input_mode = FILE;
+                options.file_dir = optarg;
+            }
+            else{
+                return;
+            }
+            options.valid = 1;
+            break;
+        
+        case 'o':
+            if (strcmp(optarg, "stdio") == 0){
+                options.output_mode = STDIO;
+            } else {
+                options.output_mode = BYTES;
+                options.blocksize = atoi(optarg);
+            }
+            break;
+        default: // '?' for unrecognized options and missing option arguments
+            fprintf(stderr, "Usage: %s [-i input_source] [-o output_mode]\n", argv[0]);
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    options.valid = 1;
+    return options;
+}
