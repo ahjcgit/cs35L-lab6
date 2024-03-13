@@ -1,7 +1,7 @@
 #ifndef RAND64_HW_H
 #define RAND64_HW_H
 
-struct cpuid {unsigned int eax, ebx, ecx, edx;};
+struct cpuid {unsigned eax, ebx, ecx, edx;};
 _Bool rdrand_supported (void);
 void hardware_rand64_init (void);
 unsigned long long hardware_rand64 (void);

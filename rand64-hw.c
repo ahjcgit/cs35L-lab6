@@ -21,22 +21,19 @@ cpuid (unsigned int leaf, unsigned int subleaf)
 }
 
 /* Return true if the CPU supports the RDRAND instruction.  */
-static _Bool
-rdrand_supported (void)
+static _Bool rdrand_supported (void)
 {
   struct cpuid extended = cpuid (1, 0);
   return (extended.ecx & bit_RDRND) != 0;
 }
 
 /* Initialize the hardware rand64 implementation.  */
-static void
-hardware_rand64_init (void)
+static void hardware_rand64_init (void)
 {
 }
 
 /* Return a random value, using hardware operations.  */
-static unsigned long long
-hardware_rand64 (void)
+static unsigned long long hardware_rand64 (void)
 {
   unsigned long long int x;
 
@@ -50,8 +47,7 @@ hardware_rand64 (void)
 }
 
 /* Finalize the hardware rand64 implementation.  */
-static void
-hardware_rand64_fini (void)
+static void hardware_rand64_fini (void)
 {
 }
 
