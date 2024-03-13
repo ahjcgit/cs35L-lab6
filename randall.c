@@ -84,12 +84,9 @@ int main (int argc, char **argv)
       rand64 = software_rand64;
       finalize = software_rand64_fini;
     }
-  if(initialize == software_rand64_init &&options.input_mode == "lrand48_r"){
-    initialize(options.file, 1);
-  } else {
-    initialize ();
-  }
-      
+    
+    
+  initialize ();   
   int wordsize = sizeof rand64 ();
   int output_errno = 0;
 
