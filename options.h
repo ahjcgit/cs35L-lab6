@@ -9,7 +9,7 @@ typedef struct {
     int valid;
     enum Input input_mode;
     enum Output output_mode;
-    char* file;
+    char* file_dir;
     unsigned int blocksize;
     long long nbytes;
 

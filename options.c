@@ -13,7 +13,7 @@ ProgramOptions parse_options(int argc, char *argv[]){
     options.input_mode = RDRAND; //Default case
     options.output_mode = STDIO; //Default case
     options.valid = 0;
-    options.file = NULL;
+    options.file_dir = NULL;
     options.blocksize = 0;
     options.nbytes = 0;
 
@@ -27,7 +27,7 @@ ProgramOptions parse_options(int argc, char *argv[]){
             options.input_mode = LRAND48;
             else{
                 options.input_mode = FILE;
-                options.file = optarg;
+                options.file_dir = optarg;
             }
             options.valid = 1;
             break;
@@ -39,6 +39,7 @@ ProgramOptions parse_options(int argc, char *argv[]){
                 options.output_mode = BYTES;
                 options.blocksize = atoi(optarg);
             }
+            options.valid = 1;
             break;
         default: // '?' for unrecognized options and missing option arguments
             fprintf(stderr, "Usage: %s [-i input_source] [-o output_mode]\n", argv[0]);
@@ -50,7 +51,6 @@ ProgramOptions parse_options(int argc, char *argv[]){
         options.nbytes = atoll(argv[optind]);
     } else {
         fprintf(stderr, "Expected argument after option\n");
-        return options;
     }
 
     options.valid = 1;
