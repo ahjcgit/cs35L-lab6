@@ -8,6 +8,7 @@ typedef struct {
     char* output_mode;
     char* file;
     unsigned int blocksize;
+    unsigned int nbytes;
 
 } ProgramOptions;
 

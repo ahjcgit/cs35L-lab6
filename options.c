@@ -12,6 +12,7 @@ ProgramOptions parse_options(int argc, char *argv[]){
     options.valid = 0;
     options.file = NULL;
     options.blocksize = 0;
+    options.nbytes = 0;
 
     int opt;
     while ((opt = getopt(argc, argv, "i:o:")) != -1) {
