@@ -2,8 +2,6 @@
 #include <limits.h>
 #include <stdlib.h>
 
-#define _POSIX_C_SOURCE 200809L
-
 /* Software implementation.  */
 
 /* Input stream containing random bytes.  */
@@ -31,7 +29,7 @@ void software_rand64_init (void)
 /* Return a random value, using software operations.  */
 unsigned long long software_rand64 (void)
 { //When input option is lrand48_r
-  unsigned long long int x;
+  unsigned long int x;
   static struct drand48_data buffer;
   
   lrand48_r(&buffer, &x);
