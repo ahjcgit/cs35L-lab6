@@ -3,8 +3,6 @@
 #include <getopt.h>
 #include "options.h"
 
-enum Input { RDRAND, LRAND48, FILE_PATH };
-enum Output { STDIO, BYTES };
 
 ProgramOptions parse_options(int argc, char *argv[]){
     ProgramOptions options;
