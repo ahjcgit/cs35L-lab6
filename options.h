@@ -4,9 +4,9 @@
 //Every options held in struct
 typedef struct {
     _Bool valid;
-    enum Input input_mode;
-    enum Output output_mode;
-    char* file_dir;
+    char* input_mode;
+    char* output_mode;
+    char* file;
     unsigned int blocksize;
 
 } ProgramOptions;
