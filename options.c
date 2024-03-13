@@ -13,7 +13,7 @@ ProgramOptions parse_options(int argc, char *argv[]){
     options.input_mode = RDRAND; //Default case
     options.output_mode = STDIO; //Default case
     options.valid = 0;
-    options.file_dir = NULL;
+    options.filedir = NULL;
     options.blocksize = 0;
     options.nbytes = 0;
 
@@ -27,7 +27,7 @@ ProgramOptions parse_options(int argc, char *argv[]){
             options.input_mode = LRAND48;
             else{
                 options.input_mode = FILE;
-                options.file_dir = optarg;
+                options.filedir = optarg;
             }
             options.valid = 1;
             break;
