@@ -106,11 +106,11 @@ int main (int argc, char **argv)
       perror ("output");
     }
 
-  // if (!valid)
-  // {
-  //   fprintf (stderr, "%s: usage: %s NBYTES\n", argv[0], argv[0]);
-  //   return 1;
-  // }
+  if (!valid)
+  {
+    fprintf (stderr, "%s: usage: %s NBYTES\n", argv[0], argv[0]);
+    return 1;
+  }
 
   finalize ();
   return !!output_errno;

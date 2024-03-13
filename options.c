@@ -3,7 +3,7 @@
 #include <getopt.h>
 #include "options.h"
 
-enum Input { RDRAND, LRAND48, FILE };
+enum Input { RDRAND, LRAND48, FILE_PATH };
 enum Output { STDIO, BYTES };
 
 ProgramOptions parse_options(int argc, char *argv[]){
@@ -26,7 +26,7 @@ ProgramOptions parse_options(int argc, char *argv[]){
             } else if (strcmp(optarg, "lrand48_r") == 0)
             options.input_mode = LRAND48;
             else{
-                options.input_mode = FILE;
+                options.input_mode = FILE_PATH;
                 options.filedir = optarg;
             }
             options.valid = 1;
