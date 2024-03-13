@@ -7,13 +7,20 @@
 static FILE *urandstream = NULL;
 static int use_lrand48 = 0;
 
+/*Open file*/
+void initfile (char* file)
+{
+    urandstream = fopen (file, "r");
+    if (! urandstream) {
+        fprintf (stderr, "Invalid file: %s\n", file);
+        abort ();
+    }
+}
+
 /* Initialize the software rand64 implementation.  */
 static void
-software_rand64_init (const char* file_dir, int use_lrand)
+software_rand64_init (void)
 {
-  use_lrand48 = use_lrand;
-  urandstream = fopen (file_dir, "r");
-
   if (! urandstream)
     abort ();
 
