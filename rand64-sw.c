@@ -19,7 +19,7 @@ void initfile (char* file)
 }
 
 /* Initialize the software rand64 implementation.  */
-static void software_rand64_init (void)
+void software_rand64_init (void)
 {
   if (! urandstream)
     abort ();
@@ -28,7 +28,7 @@ static void software_rand64_init (void)
 }
 
 /* Return a random value, using software operations.  */
-static unsigned long longsoftware_rand64 (void)
+unsigned long longsoftware_rand64 (void)
 { //When input option is lrand48_r
   unsigned long long int x;
   if (use_lrand48){
@@ -41,13 +41,13 @@ static unsigned long longsoftware_rand64 (void)
 }
 
 /* Finalize the software rand64 implementation.  */
-static void
+void
 software_rand64_fini (void)
 {
   fclose (urandstream);
 }
 
-static _Bool writebytes (unsigned long long x, int nbytes){
+_Bool writebytes (unsigned long long x, int nbytes){
   do{
     if (putchar (x) < 0) return 0;
       x >>= CHAR_BIT;
