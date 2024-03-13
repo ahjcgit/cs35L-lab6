@@ -21,12 +21,9 @@ ProgramOptions parse_options(int argc, char *argv[]){
                 options.input_mode = "rdrand";
             } else if (strcmp(optarg, "lrand48_r") == 0)
             options.input_mode = "ldrand48_r";
-            else if ('/' == optarg[0]){
+            else{
                 options.input_mode = "file";
                 options.file = optarg;
-            }
-            else{
-                return;
             }
             options.valid = 1;
             break;
@@ -43,6 +40,13 @@ ProgramOptions parse_options(int argc, char *argv[]){
             fprintf(stderr, "Usage: %s [-i input_source] [-o output_mode]\n", argv[0]);
             exit(EXIT_FAILURE);
         }
+    }
+
+    if (optind < argc){
+        options.nbytes = atoll(argv[optind]);
+    } else {
+        fprint(stderr, "Expected argument after option\n");
+        return options;
     }
 
     options.valid = 1;
