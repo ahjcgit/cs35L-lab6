@@ -19,8 +19,7 @@ void initfile (char* file)
 }
 
 /* Initialize the software rand64 implementation.  */
-static void
-software_rand64_init (void)
+static void software_rand64_init (void)
 {
   if (! urandstream)
     abort ();

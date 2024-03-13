@@ -1,5 +1,6 @@
 #include "rand64-hw.h"
 #include <stdbool.h>
+#include <x86intrin.h>
 
 #define bit_RDRND ( 1 << 30)
 

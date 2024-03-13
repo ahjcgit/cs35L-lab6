@@ -34,7 +34,7 @@ TAREXT = tgz
 default: randall
 
 randall: $(OBJS)
-	$(CC) $(CFLAGS) $@.c -o $@ $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
