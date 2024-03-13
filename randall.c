@@ -45,8 +45,8 @@ int main (int argc, char **argv)
   ProgramOptions options = parse_options(argc, argv);
 
   /* Check arguments.  */
-  bool valid = false;
-  long long nbytes;
+  bool valid = options.valid;
+  long long nbytes = options.nbytes;
 
 
   if (argc == 2)
