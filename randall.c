@@ -57,11 +57,6 @@ int main (int argc, char **argv)
       if (errno) perror (argv[1]);
       else valid = !*endptr && 0 <= nbytes;
     }
-  if (!valid)
-    {
-      fprintf (stderr, "%s: usage: %s NBYTES\n", argv[0], argv[0]);
-      return 1;
-    }
 
   /* If there's no work to do, don't worry about which library to use.  */
   if (nbytes == 0)
@@ -110,6 +105,12 @@ int main (int argc, char **argv)
       errno = output_errno;
       perror ("output");
     }
+
+  if (!valid)
+  {
+    fprintf (stderr, "%s: usage: %s NBYTES\n", argv[0], argv[0]);
+    return 1;
+  }
 
   finalize ();
   return !!output_errno;
