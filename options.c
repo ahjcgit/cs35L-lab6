@@ -3,12 +3,15 @@
 #include <getopt.h>
 #include "options.h"
 
+enum Input { RDRAND, LRAND48, FILE };
+enum Output { STDIO, BYTES };
+
 ProgramOptions parse_options(int argc, char *argv[]){
     ProgramOptions options;
 
     //Initializing default cases
-    options.input_mode = "rdrand"; //Default case
-    options.output_mode = "stdio"; //Default case
+    options.input_mode = RDRAND; //Default case
+    options.output_mode = STDIO; //Default case
     options.valid = 0;
     options.file = NULL;
     options.blocksize = 0;
@@ -19,11 +22,11 @@ ProgramOptions parse_options(int argc, char *argv[]){
         switch (opt) {
         case 'i':
             if (strcmp(optarg, "rdrand") == 0){
-                options.input_mode = "rdrand";
+                options.input_mode = RDRAND;
             } else if (strcmp(optarg, "lrand48_r") == 0)
-            options.input_mode = "ldrand48_r";
+            options.input_mode = LRAND48;
             else{
-                options.input_mode = "file";
+                options.input_mode = FILE;
                 options.file = optarg;
             }
             options.valid = 1;
@@ -31,9 +34,9 @@ ProgramOptions parse_options(int argc, char *argv[]){
         
         case 'o':
             if (strcmp(optarg, "stdio") == 0){
-                options.output_mode = "stdio";
+                options.output_mode = STDIO;
             } else {
-                options.output_mode = "bytes";
+                options.output_mode = BYTES;
                 options.blocksize = atoi(optarg);
             }
             break;
@@ -46,7 +49,7 @@ ProgramOptions parse_options(int argc, char *argv[]){
     if (optind < argc){
         options.nbytes = atoll(argv[optind]);
     } else {
-        fprint(stderr, "Expected argument after option\n");
+        fprintf(stderr, "Expected argument after option\n");
         return options;
     }
 

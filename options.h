@@ -1,14 +1,17 @@
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
+enum Input { RDRAND, LRAND48, FILE };
+enum Output { STDIO, BYTES };
+
 //Every options held in struct
 typedef struct {
-    _Bool valid;
-    char* input_mode;
-    char* output_mode;
+    int valid;
+    enum Input input_mode;
+    enum Output output_mode;
     char* file;
     unsigned int blocksize;
-    unsigned int nbytes;
+    long long nbytes;
 
 } ProgramOptions;
 
